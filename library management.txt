@@ -1,0 +1,187 @@
+LIBRARY MANAGEMENT SYSTEM
+
+
+LOGIN PORTAL
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Library Management System - Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+    .container {
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      border: none;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+  <script>
+    function validateForm() {
+      var username = document.forms["loginForm"]["username"].value;
+      var password = document.forms["loginForm"]["password"].value;
+
+      if (username == "") {
+        document.getElementById("usernameError").innerHTML =
+          "Username is required.";
+        return false;
+      }
+      if (password == "") {
+        document.getElementById("passwordError").innerHTML =
+          "Password is required.";
+        return false;
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <form name="loginForm" onsubmit="return validateForm()">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" />
+        <span id="usernameError" class="error"></span>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
+        <span id="passwordError" class="error"></span>
+      </div>
+      <input type="submit" value="Login" />
+    </form>
+  </div>
+</body>
+</html>
+
+
+SOURCE CODE:
+
+
+class Book:
+    def _init_(self, title, quantity):
+        self.title = title
+        self.quantity = quantity
+
+
+class Library:
+    def _init_(self):
+        self.books = []
+
+    def add_book(self, title, quantity):
+        book = Book(title, quantity)
+        self.books.append(book)
+        print("Book added successfully.")
+
+    def display_books(self):
+        if not self.books:
+            print("No books in the library.")
+        else:
+            print("Books in the library:")
+            for book in self.books:
+                print(f"Title: {book.title}, Quantity: {book.quantity}")
+
+    def search_book(self, title):
+        for book in self.books:
+            if book.title.lower() == title.lower():
+                print(f"Book found. Title: {book.title}, Quantity: {book.quantity}")
+                return
+        print("Book not found.")
+
+    def update_quantity(self, title, quantity):
+        for book in self.books:
+            if book.title.lower() == title.lower():
+                book.quantity = quantity
+                print("Quantity updated successfully.")
+                return
+        print("Book not found.")
+
+    def delete_book(self, title):
+        for book in self.books:
+            if book.title.lower() == title.lower():
+                self.books.remove(book)
+                print("Book deleted successfully.")
+                return
+        print("Book not found.")
+
+
+def main():
+    library = Library()
+
+    while True:
+        print("\n===== Library Management =====")
+        print("1. Add Book")
+        print("2. Display Books")
+        print("3. Search Book")
+        print("4. Update Quantity")
+        print("5. Delete Book")
+        print("0. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == "1":
+            title = input("Enter book title: ")
+            quantity = int(input("Enter book quantity: "))
+            library.add_book(title, quantity)
+        elif choice == "2":
+            library.display_books()
+        elif choice == "3":
+            title = input("Enter book title to search: ")
+            library.search_book(title)
+        elif choice == "4":
+            title = input("Enter book title to update quantity: ")
+            quantity = int(input("Enter new quantity: "))
+            library.update_quantity(title, quantity)
+        elif choice == "5":
+            title = input("Enter book title to delete: ")
+            library.delete_book(title)
+        elif choice == "0":
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+
+if _name_ == "_main_":
+    main()
