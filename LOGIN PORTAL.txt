@@ -1,0 +1,94 @@
+LOGIN PORTAL
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Library Management System - Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+    }
+    .container {
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf50;
+      border: none;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+  </style>
+  <script>
+    function validateForm() {
+      var username = document.forms["loginForm"]["username"].value;
+      var password = document.forms["loginForm"]["password"].value;
+
+      if (username == "") {
+        document.getElementById("usernameError").innerHTML =
+          "Username is required.";
+        return false;
+      }
+      if (password == "") {
+        document.getElementById("passwordError").innerHTML =
+          "Password is required.";
+        return false;
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <form name="loginForm" onsubmit="return validateForm()">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" />
+        <span id="usernameError" class="error"></span>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" />
+        <span id="passwordError" class="error"></span>
+      </div>
+      <input type="submit" value="Login" />
+    </form>
+  </div>
+</body>
+</html>
